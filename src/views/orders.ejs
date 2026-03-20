@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Order Management</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-slate-100 text-slate-800">
+    <main class="mx-auto max-w-6xl p-6">
+        <header class="mb-6">
+            <h1 class="text-3xl font-extrabold text-indigo-700">Order Collection</h1>
+            <p class="mt-2 text-slate-600">Total orders: <%= orders.length %> · Total amount: <strong>
+                        <%= totalAmountFromDB %>
+                    </strong></p>
+            <p class="mt-1 text-slate-600">Count product_id = "somi": <strong>
+                    <%= productCount %>
+                </strong></p>
+        </header>
+
+        <section class="rounded-lg bg-white p-4 shadow-sm">
+            <h2 class="mb-4 text-lg font-semibold text-slate-700">Product Summary</h2>
+            <div class="overflow-x-auto">
+                <table class="min-w-full divide-y divide-slate-200 text-sm">
+                    <thead class="bg-slate-50 text-slate-500 uppercase tracking-wider">
+                        <tr>
+                            <th class="px-4 py-3 text-left">No</th>
+                            <th class="px-4 py-3 text-left">Order ID</th>
+                            <th class="px-4 py-3 text-left">Product name</th>
+                            <th class="px-4 py-3 text-left">Price</th>
+                            <th class="px-4 py-3 text-left">Quantity</th>
+                            <th class="px-4 py-3 text-left">Total</th>
+                            <th class="px-4 py-3 text-left">Delivery address</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100 bg-white">
+                        <% tableRows.forEach((row, idx)=> { %>
+                            <tr class="hover:bg-slate-50">
+                                <td class="px-4 py-3">
+                                    <%= idx + 1 %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.orderid %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.product_name %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.price.toFixed(2) %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.quantity %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.total.toFixed(2) %>
+                                </td>
+                                <td class="px-4 py-3">
+                                    <%= row.delivery_address %>
+                                </td>
+                            </tr>
+                            <% }); %>
+                    </tbody>
+                    <tfoot class="bg-slate-50 font-semibold">
+                        <tr>
+                            <td class="px-4 py-3" colspan="5">Total Grand</td>
+                            <td class="px-4 py-3">
+                                <%= totalAmountFromDB.toFixed(2) %>
+                            </td>
+                            <td class="px-4 py-3"></td>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </section>
+
+        <section class="mt-5 rounded-lg bg-white p-4 shadow-sm">
+            <h2 class="text-lg font-semibold text-slate-700">Action Examples</h2>
+            <ol class="mt-2 list-decimal pl-4 text-sm text-slate-600">
+                <li>Gửi POST /orders/batch với JSON array để insert nhiều document.</li>
+                <li>Gửi PATCH /orders/{orderid}/delivery-address với body { "delivery_address": "New Hanoi" }.</li>
+                <li>Gửi DELETE /orders/{_id} để xoá order theo _id.</li>
+                <li>Gửi GET /orders/view để xem bảng và tổng.</li>
+            </ol>
+        </section>
+    </main>
+</body>
+
+</html>
