@@ -43,7 +43,6 @@ exports.updateOrderProduct = async (req, res) => {
   } catch (error) {
     throw error;
   }
-  s;
 };
 
 exports.deleteOrderProduct = async (req, res) => {
