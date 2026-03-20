@@ -1,0 +1,11 @@
+{
+  "name": "t2502e_nguyen_giang_ha_mongodb_finaltest",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
+}
